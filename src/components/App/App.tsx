@@ -1,24 +1,16 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import HomePage from '../HomePage/HomePage';
 
 function App() {
-  const state = useSelector(state => state);
-  console.log(state);
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

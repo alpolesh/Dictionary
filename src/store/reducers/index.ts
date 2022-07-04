@@ -3,5 +3,7 @@ import { dictionaryReducer } from "./dictionaryReducer";
 
 
 export const rootReducer = combineReducers({
-  user: dictionaryReducer,
-})
+  dictionary: dictionaryReducer,
+});
+
+export type RootState = ReturnType<typeof rootReducer>;

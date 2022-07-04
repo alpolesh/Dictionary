@@ -9,11 +9,11 @@ const initialState: DictionaryState = {
 export const dictionaryReducer = (state = initialState, action: DictionaryAction): DictionaryState => {
   switch (action.type) {
     case DictionaryActionTypes.FETCH_WORDS:
-      return {loading: true, error: null, words: []};
+      return {...state, error: null, loading: true};
     case DictionaryActionTypes.FETCH_WORDS_SUCCESS:
       return {loading: false, error: null, words: action.payload};
     case DictionaryActionTypes.FETCH_WORDS_ERROR:
-      return {loading: false, error: action.payload, words: []};
+      return {...state, loading: false, error: action.payload};
     default:
       return state;
   }
