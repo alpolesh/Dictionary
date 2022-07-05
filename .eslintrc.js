@@ -38,7 +38,7 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'max-len': ['error', { code: 120 }],
+    'max-len': ['error', { code: 140 }],
     'import/prefer-default-export': 'off',
     'no-underscore-dangle': 'off',
     'no-shadow': 'off',

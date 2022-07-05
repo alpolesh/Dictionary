@@ -1,15 +1,21 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { /* useEffect */ } from 'react';
+import {
+  Routes, Route, /* useLocation */
+} from 'react-router-dom';
 import HomePage from '../HomePage/HomePage';
+import ResultPage from '../ResultPage/ResultPage';
 
 function App() {
+  // const location = useLocation();
+  // useEffect(() => {
+  //   console.log(location);
+  // }, [location]);
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/:word" element={<ResultPage />} />
+      </Routes>
     </div>
   );
 }
