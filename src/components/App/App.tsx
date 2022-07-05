@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from '../HomePage/HomePage';
 
 function App() {
