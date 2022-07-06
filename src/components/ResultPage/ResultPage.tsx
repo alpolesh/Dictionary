@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { DictionaryItem } from '../../types/dictionary';
+import { fetchWordDefinitions } from '../../store/action-creators/dictionary';
+import { AppDispatch, DictionaryItem } from '../../types/dictionary';
 import WordCard from '../WordCard/WordCard';
 
 function ResultPage() {
+  const dispatch: AppDispatch = useDispatch();
+  const { word } = useParams();
   const dictionaryState = useTypedSelector((state) => state.dictionary);
   const wordsArray: DictionaryItem[] = dictionaryState.words;
-  console.log(wordsArray);
+  useEffect(() => {
+    if (!dictionaryState.words.length && word) {
+      dispatch(fetchWordDefinitions(word));
+    }
+  }, [word]);
   return (
     <div className="result-page">
       <div className="results">
@@ -15,7 +24,6 @@ function ResultPage() {
             <WordCard />
           ))}
         </section>
-
       </div>
     </div>
   );

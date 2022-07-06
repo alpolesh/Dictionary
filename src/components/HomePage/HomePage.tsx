@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import searchIcon from '../../images/search__icon.png';
-import { fetchWordDefinitions } from '../../store/action-creators/dictionary';
-import { AppDispatch } from '../../types/dictionary';
+// import { fetchWordDefinitions } from '../../store/action-creators/dictionary';
+// import { AppDispatch } from '../../types/dictionary';
 import Spinner from '../Spinner/Spinner';
 
 function HomePage() {
   const dictionaryState = useTypedSelector((state) => state.dictionary);
-  const dispatch: AppDispatch = useDispatch();
+  // const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
   const [valueFromSearchedInput, setValueFromSearchedInput] = useState('');
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch(fetchWordDefinitions(valueFromSearchedInput, navigate));
+    // dispatch(fetchWordDefinitions(valueFromSearchedInput));
+    navigate(`/${valueFromSearchedInput}`);
   }
 
   function handleChangeSearchedInput(e: React.ChangeEvent<HTMLInputElement>) {
