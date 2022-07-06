@@ -1,20 +1,21 @@
-import React, { /* useEffect */ } from 'react';
+import React from 'react';
 import {
-  Routes, Route, /* useLocation */
+  Routes, Route,
 } from 'react-router-dom';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import HomePage from '../HomePage/HomePage';
+import NotFound from '../NotFound/NotFound';
 import ResultPage from '../ResultPage/ResultPage';
 
 function App() {
-  // const location = useLocation();
-  // useEffect(() => {
-  //   console.log(location);
-  // }, [location]);
+  const dictionaryState = useTypedSelector((state) => state.dictionary);
+  const errorMessage = dictionaryState.error;
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/:word" element={<ResultPage />} />
+        <Route path="/notfound" element={<NotFound errorMessage={errorMessage} />} />
       </Routes>
     </div>
   );
