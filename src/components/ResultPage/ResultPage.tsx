@@ -1,26 +1,32 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import shortid from 'shortid';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { fetchWordDefinitions } from '../../store/action-creators/dictionary';
+import { fetchWordDefinitions, resetDictionary } from '../../store/action-creators/dictionary';
 import { AppDispatch, DictionaryItem } from '../../types/dictionary';
 import Spinner from '../Spinner/Spinner';
 import WordCard from '../WordCard/WordCard';
 
 function ResultPage() {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatchAsync: AppDispatch = useDispatch();
+  const dispatchSync = useDispatch();
   const { word } = useParams();
   const navigate = useNavigate();
   const dictionaryState = useTypedSelector((state) => state.dictionary);
   const wordsArray: DictionaryItem[] = dictionaryState.words;
   useEffect(() => {
-    if (!dictionaryState.words.length && word) {
-      dispatch(fetchWordDefinitions(word));
+    dispatchSync(resetDictionary());
+    if (word) {
+      dispatchAsync(fetchWordDefinitions(word));
     }
   }, [word]);
-  if (dictionaryState.error) {
-    navigate('/notfound');
-  }
+  useEffect(() => {
+    if (dictionaryState.error) {
+      navigate('/notfound');
+    }
+  }, [dictionaryState.error]);
+
   return (
     dictionaryState.loading
       ? <Spinner />
@@ -28,8 +34,8 @@ function ResultPage() {
         <div className="result-page">
           <div className="results">
             <section className="results__word-cards">
-              {wordsArray.map(() => (
-                <WordCard />
+              {wordsArray.map((item) => (
+                <WordCard wordData={item} key={shortid.generate()} />
               ))}
             </section>
           </div>

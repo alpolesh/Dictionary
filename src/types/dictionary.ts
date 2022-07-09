@@ -15,7 +15,7 @@ export interface Phonetic {
 export interface Definition {
   definition: string
   synonyms: string[]
-  antonyms: any[]
+  antonyms: string[]
   example?: string
 }
 
@@ -23,12 +23,7 @@ export interface Meaning {
   partOfSpeech: string
   definitions: Definition[]
   synonyms: string[]
-  antonyms: any[]
-}
-
-export interface License2 {
-  name: string
-  url: string
+  antonyms: string[]
 }
 
 export interface DictionaryItem {
@@ -36,7 +31,7 @@ export interface DictionaryItem {
   phonetic: string
   phonetics: Phonetic[]
   meanings: Meaning[]
-  license: License2
+  license: License
   sourceUrls: string[]
 }
 
@@ -50,6 +45,7 @@ export enum DictionaryActionTypes {
   FETCH_WORDS = 'FETCH_WORDS',
   FETCH_WORDS_SUCCESS = 'FETCH_WORDS_SUCCESS',
   FETCH_WORDS_ERROR = 'FETCH_WORDS_ERROR',
+  RESET_DICTIONARY = 'RESET_DICTIONARY',
 }
 
 interface FetchWordsAction {
@@ -66,6 +62,10 @@ interface FetchWordsErrorAction {
   payload: string;
 }
 
-export type DictionaryAction = FetchWordsAction | FetchWordsSuccessAction | FetchWordsErrorAction;
+interface ResetDictionaryAction {
+  type: DictionaryActionTypes.RESET_DICTIONARY;
+}
+
+export type DictionaryAction = FetchWordsAction | FetchWordsSuccessAction | FetchWordsErrorAction | ResetDictionaryAction;
 export type FetchWordDefinitions = ThunkAction<Promise<void>, DictionaryState, string, DictionaryAction>;
 export type AppDispatch = ThunkDispatch<DictionaryState, string, DictionaryAction>;

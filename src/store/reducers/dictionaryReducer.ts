@@ -14,6 +14,8 @@ export const dictionaryReducer = (state = initialState, action: DictionaryAction
       return { loading: false, error: null, words: action.payload };
     case DictionaryActionTypes.FETCH_WORDS_ERROR:
       return { loading: false, error: action.payload, words: [] };
+    case DictionaryActionTypes.RESET_DICTIONARY:
+      return { loading: false, error: null, words: [] };
     default:
       return state;
   }

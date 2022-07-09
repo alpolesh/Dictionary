@@ -16,3 +16,5 @@ export const fetchWordDefinitions = (word: string): FetchWordDefinitions => asyn
     }
   }
 };
+
+export const resetDictionary = () => ({ type: DictionaryActionTypes.RESET_DICTIONARY });

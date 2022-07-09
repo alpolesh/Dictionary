@@ -1,49 +1,55 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import shortid from 'shortid';
+import Link from '@mui/material/Link';
+import { DictionaryItem } from '../../types/dictionary';
+import 'react-h5-audio-player/lib/styles.css';
+import PhoneticsCard from '../PhoneticsCard/PhoneticsCard';
+import MeaningsCard from '../MeaningsCard/MeaningsCard';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
-
-function WordCard() {
+function WordCard(props: {wordData: DictionaryItem}) {
+  const { wordData } = props;
   return (
     <div className="results__word-card">
-      <Card sx={{ minWidth: 275 }}>
+      <Card sx={{ minWidth: 320 }}>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Word of the Day
+          <Typography variant="h3" component="div">
+            {wordData.word}
           </Typography>
-          <Typography variant="h5" component="div">
-            be
-            {bull}
-            nev
-            {bull}
-            o
-            {bull}
-            lent
+          <Card variant="outlined" sx={{ marginBottom: 1 }}>
+            <CardContent>
+              <Typography sx={{ fontSize: 18 }} gutterBottom>
+                Phonetics
+              </Typography>
+              {wordData.phonetics.map((phoneticsData) => (
+                <PhoneticsCard phoneticsData={phoneticsData} key={shortid.generate()} />
+              ))}
+            </CardContent>
+          </Card>
+          <Card variant="outlined" sx={{ marginBottom: 1 }}>
+            <CardContent>
+              <Typography sx={{ fontSize: 18 }} gutterBottom>
+                Meanings
+              </Typography>
+              {wordData.meanings.map((meaningsData) => (
+                <MeaningsCard meaningsData={meaningsData} key={shortid.generate()} />
+              ))}
+            </CardContent>
+          </Card>
+          <Typography sx={{ fontSize: 16 }} gutterBottom>
+            License:
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            adjective
+          <Typography sx={{ fontSize: 14 }} gutterBottom>
+            <Link href={wordData.license.url} target="_blank">{wordData.license.name}</Link>
           </Typography>
-          <Typography variant="body2">
-            well meaning and kindly.
-            <br />
-            a benevolent smile
-          </Typography>
+          {wordData.sourceUrls.map((url) => (
+            <Typography sx={{ fontSize: 14 }} gutterBottom key={shortid.generate()}>
+              <Link href={url} target="_blank">{url}</Link>
+            </Typography>
+          ))}
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     </div>
   );
