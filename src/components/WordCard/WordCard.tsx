@@ -6,8 +6,8 @@ import shortid from 'shortid';
 import Link from '@mui/material/Link';
 import { DictionaryItem } from '../../types/dictionary';
 import 'react-h5-audio-player/lib/styles.css';
-import PhoneticsCard from '../PhoneticsCard/PhoneticsCard';
-import MeaningsCard from '../MeaningsCard/MeaningsCard';
+import Phonetics from '../Phonetics/Phonetics';
+import Meanings from '../Meanings/Meanings';
 
 function WordCard(props: {wordData: DictionaryItem}) {
   const { wordData } = props;
@@ -18,26 +18,8 @@ function WordCard(props: {wordData: DictionaryItem}) {
           <Typography variant="h3" component="div">
             {wordData.word}
           </Typography>
-          <Card variant="outlined" sx={{ marginBottom: 1 }}>
-            <CardContent>
-              <Typography sx={{ fontSize: 18 }} gutterBottom>
-                Phonetics
-              </Typography>
-              {wordData.phonetics.map((phoneticsData) => (
-                <PhoneticsCard phoneticsData={phoneticsData} key={shortid.generate()} />
-              ))}
-            </CardContent>
-          </Card>
-          <Card variant="outlined" sx={{ marginBottom: 1 }}>
-            <CardContent>
-              <Typography sx={{ fontSize: 18 }} gutterBottom>
-                Meanings
-              </Typography>
-              {wordData.meanings.map((meaningsData) => (
-                <MeaningsCard meaningsData={meaningsData} key={shortid.generate()} />
-              ))}
-            </CardContent>
-          </Card>
+          <Phonetics wordData={wordData} />
+          <Meanings wordData={wordData} />
           <Typography sx={{ fontSize: 16 }} gutterBottom>
             License:
           </Typography>
