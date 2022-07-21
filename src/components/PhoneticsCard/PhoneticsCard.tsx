@@ -4,7 +4,6 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import AudioPlayer from 'react-h5-audio-player';
 import Link from '@mui/material/Link';
-import shortid from 'shortid';
 import 'react-h5-audio-player/lib/styles.css';
 import { Phonetic } from '../../types/dictionary';
 
@@ -23,7 +22,6 @@ function PhoneticCard(props: {phoneticsData: Phonetic}) {
                 src={phoneticsData.audio}
                 showJumpControls={false}
                 loop={false}
-                key={shortid.generate()}
               />
             ) : ''}
           {phoneticsData.sourceUrl ? (

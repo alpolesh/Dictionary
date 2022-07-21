@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import shortid from 'shortid';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { fetchWordDefinitions, resetDictionary } from '../../store/action-creators/dictionary';
 import { AppDispatch, DictionaryItem } from '../../types/dictionary';
@@ -34,8 +33,8 @@ function ResultPage() {
         <div className="result-page">
           <div className="results">
             <section className="results__word-cards">
-              {wordsArray.map((item) => (
-                <WordCard wordData={item} key={shortid.generate()} />
+              {wordsArray.map((item, index) => (
+                <WordCard wordData={item} key={index + item.license.name} />
               ))}
             </section>
           </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import shortid from 'shortid';
 import { Meaning } from '../../types/dictionary';
 import DefinitionCard from '../App/Definition/Definition';
 
@@ -19,8 +18,8 @@ function MeaningsCard(props: {meaningsData: Meaning}) {
         </Typography>
         <Card variant="outlined" sx={{ marginBottom: 1 }}>
           <CardContent>
-            {meaningsData.definitions.map((defenitionData) => (
-              <DefinitionCard defenitionData={defenitionData} key={shortid.generate()} />
+            {meaningsData.definitions.map((defenitionData, index) => (
+              <DefinitionCard defenitionData={defenitionData} key={index + defenitionData.definition.split(' ')[0]} />
             ))}
           </CardContent>
         </Card>

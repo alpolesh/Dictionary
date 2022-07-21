@@ -46,5 +46,6 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
     'default-param-last': 0,
+    'react/no-array-index-key': 0,
   },
 };

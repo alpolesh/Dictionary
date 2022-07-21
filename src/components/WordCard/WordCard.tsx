@@ -2,7 +2,6 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import shortid from 'shortid';
 import Link from '@mui/material/Link';
 import { DictionaryItem } from '../../types/dictionary';
 import 'react-h5-audio-player/lib/styles.css';
@@ -27,7 +26,7 @@ function WordCard(props: {wordData: DictionaryItem}) {
             <Link href={wordData.license.url} target="_blank">{wordData.license.name}</Link>
           </Typography>
           {wordData.sourceUrls.map((url) => (
-            <Typography sx={{ fontSize: 14 }} gutterBottom key={shortid.generate()}>
+            <Typography sx={{ fontSize: 14 }} gutterBottom key={url}>
               <Link href={url} target="_blank">{url}</Link>
             </Typography>
           ))}
